@@ -1,0 +1,119 @@
+*{
+  margin:0;
+  padding:0;
+}
+#root{
+  height:1240px;
+  width:100%;
+}
+.App{
+  background-color: rgba(238, 232, 232, 0.925);
+  height:100%;
+  width:100%;
+}
+.input-greentea{
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+#todos-title{
+  text-align: center;
+  font-family: cursive;
+  font-size: 52px;
+  color:rgba(248, 142, 104, 0.555);
+}
+.input-all {
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+}
+#did-All{
+  text-align: center;
+  height:30px;
+  width:30px;
+  font-family: fantasy;
+  vertical-align: middle;
+  background-image: url(../src/assets/pikaqiu.svg);
+  background-color:rgba(238, 232, 232, 0.925);
+  border: none;
+}
+#input-button{
+  height:70px;
+  width:45px;
+  border-radius:10px;
+  font-family: fantasy;
+  vertical-align: middle;
+  border: none;
+}
+
+.input-frame{
+  font-family: cursive;
+  height:67px;
+  width:400px;
+  font-size:27px;
+  border-radius:10px;
+  vertical-align: middle;
+}
+
+.item-quaqua{
+  margin:0 auto;
+  font-family: cursive;
+  font-size:27px;
+  height:67px;
+  width:470px;
+  background-color:white;
+}
+.list-btn {
+  margin-top:15px;
+  margin-right:15px;
+  float:right;
+  height:30px;
+  width:30px;
+  font-family: fantasy;
+  vertical-align: middle;
+  background-image: url(../src/assets/delete.svg);
+  border:none;
+  
+}
+.unorder-list{
+  width:470px;
+  list-style:none;
+}
+.item-list{
+  display: block;
+  width:470px;
+}
+.list-all{
+  background-color: white;
+  width:470px;
+  margin:0 auto;
+  margin-top:10px;
+  border: 10px;
+}
+.btn-list{
+  width:470px;
+}
+/* #changeCheckbox1{
+  display: none;
+}
+#changeCheckbox2{
+  display: none;
+}
+#changeCheckbox3{
+  display: none;
+} */
+.checkbox-div{
+  display:inline-block;
+  width:30px;
+  height:30px;
+  background-image:url(../src/assets/before.svg);
+}
+#changeCheckbox1:checked ~ #checkbox-img1 {
+  background-image: 'url(../src/assets/after.svg)';
+}
+#changeCheckbox2:checked ~ #checkbox-img2 {
+  background-image: url(../src/assets/after.svg);
+}
+#changeCheckbox3:checked ~ #checkbox-img3 {
+  background-image: url(../src/assets/after.svg);
+}
