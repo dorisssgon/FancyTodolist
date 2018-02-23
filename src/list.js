@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './index.css';
 import './App.css';
 import TodoFrame from './todoframe';
+import after from '../src/assets/after.svg';
+import before from '../src/assets/before.svg';
 
 class ListItem extends Component {
     constructor(props) {
@@ -24,22 +26,33 @@ class ListItem extends Component {
         if (this.state.category === "all"){
         return(     
                 this.props.items.map((item,index)=> {
+                var style = {};
+                    if(item.completed === false) {
+                        style={
+                            
+                            backgroundImage: 'url(' + before + ')',
+                    }
+                    }else{
+                        style ={
+                        
+                        backgroundImage: 'url(' + after + ')',
+                       
+                        }
+                    }
                     var changeCheckbox = `changeCheckbox1${item.id}`;  
-                  
                        return(
                         <li className="item-quaqua" key={index}>
                             <label htmlFor={changeCheckbox} id="input-btn-img1">
-                            <input type="checkbox"
+                            <input type="checkbox" className="list-btnn"
                             id={changeCheckbox} 
                             onClick={()=>this.props.onClickCheckBox(item)}
                             checked={item.completed}
                             style={{
                                 display:'none'
                             }}/>
-                            <div className="checkbox-div"></div>
+                            <div className = "imageicon"style={style}></div>
                             </label>
-                            {item.content}
-                            
+                           {item.content}
                             <button className="list-btn" onClick={()=>this.props.deleteSingle(item,index)}></button>
                         </li>);
                     }
@@ -47,18 +60,36 @@ class ListItem extends Component {
         );}
         else if (this.state.category === "active") {
             var activeItems = this.props.items.filter((item)=>{
+                
                 return(item.completed === false)
                 })
             return(   
                 activeItems.map((item,index)=> {  
+                    var style = {};
+                    if(item.completed === false) {
+                        style={
+                            
+                            backgroundImage: 'url(' + before + ')',
+                    }
+                    }else{
+                        style ={
+                        
+                        backgroundImage: 'url(' + after + ')',
+                       
+                        }
+                    }
+                    var changeCheckbox = `changeCheckbox2${item.id}`;  
                        return(
                         <li className="item-quaqua" key={index}>
-                        <label htmlFor="changeCheckbox2" id="input-btn-img2">
+                            <label htmlFor={changeCheckbox} id="input-btn-img2">
                             <input type="checkbox"
-                            id="changeCheckbox2"
+                            id={changeCheckbox} 
                             onClick={()=>this.props.onClickCheckBox(item)}
-                            checked={item.completed}/>
-                            <div id="checkbox-img2"></div>
+                            checked={item.completed}
+                            style={{
+                                display:'none'
+                            }}/>
+                            <div className = "imageicon"style={style}></div>
                             </label>
                             {item.content}
                             <button className="list-btn" onClick={()=>this.props.deleteSingle(item,index)}></button>
@@ -73,21 +104,35 @@ class ListItem extends Component {
                 })
             return(   
                 completedItems.map((item,index)=> {  
-                       return(
-                           <div>
-                        <li className="item-quaqua" key={index}>
-                            <label htmlFor="changeCheckbox3" id="input-btn-img3">
-                            <input type="checkbox"
-                            id="changeCheckbox3"
-                            onClick={()=>this.props.onClickCheckBox(item)}
-                            checked={item.completed}/>
-                            <div id="checkbox-img3"></div>
-                            </label>
-                            {item.content}
-                            <button className="list-btn"onClick={()=>this.props.deleteSingle(item,index)}></button>);
-                        </li>
+                    var style = {};
+                    if(item.completed === false) {
+                        style={
+                            
+                            backgroundImage: 'url(' + before + ')',
+                    }
+                    }else{
+                        style ={
                         
-                        </div>)
+                        backgroundImage: 'url(' + after + ')',
+                       
+                        }
+                    }
+                    var changeCheckbox = `changeCheckbox3${item.id}`;  
+                    return(
+                     <li className="item-quaqua" key={index}>
+                         <label htmlFor={changeCheckbox} id="input-btn-img3">
+                         <input type="checkbox"
+                         id={changeCheckbox} 
+                         onClick={()=>this.props.onClickCheckBox(item)}
+                         checked={item.completed}
+                         style={{
+                             display:'none'
+                         }}/>
+                         <div className = "imageicon"style={style}></div>
+                         </label>
+                         {item.content}
+                         <button className="list-btn" onClick={()=>this.props.deleteSingle(item,index)}></button>
+                     </li>);
                     }
                 )
         );
@@ -102,12 +147,12 @@ class ListItem extends Component {
                     </ul>
                  </div>    
     
-                <span>{this.props.items.length} items left</span>
+                <span id= "left-span">{this.props.items.length} items left</span>
                 <div className="btn-list">
-                <button className = "active" onClick={this.changeCategory} value="all">All</button>
-                <button onClick={this.changeCategory} value="active">Active</button>
-                <button onClick={this.changeCategory} value="completed">Completed</button>
-                <button onClick={this.props.clearCompleted} value="delete">clearCompleted</button>
+                <button className = "last-btn" onClick={this.changeCategory} value="all">All</button>
+                <button className = "last-btn" onClick={this.changeCategory} value="active">Active</button>
+                <button className = "last-btn" onClick={this.changeCategory} value="completed">Completed</button>
+                <button className = "long-btn" onClick={this.props.clearCompleted} value="delete">clearCompleted</button>
                 </div>
             </div>
 

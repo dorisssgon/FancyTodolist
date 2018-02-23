@@ -44,9 +44,18 @@ class TodoFrame extends Component {
 
     didAll(){
         var ArrayList1 = this.state.group.slice();
-        ArrayList1.map((item)=>{
-            item.completed = true;
+        var checked = ArrayList1.every((item)=>{
+            return item.completed === true;
         })
+        if (checked === true) {
+            ArrayList1.map((item)=>{
+                item.completed = false;
+            })
+        }else{
+            ArrayList1.map((item)=>{
+                item.completed = true;
+            })
+        }
         this.setState({
             group:ArrayList1
         })
@@ -62,18 +71,18 @@ class TodoFrame extends Component {
             }
     deleteSingle(clicked,index){
         var ArrayList3 = this.state.group.slice();
-        if(clicked.completed === true){
             ArrayList3.splice(index,1);
             this.setState({
                 group:ArrayList3
             })
-        }
+        
     }
     
 
     render() {
       return (
         <div>         
+
             <TodoInput addItem={this.addItem} didAll={this.didAll}/>
             <ListItem items={this.state.group} onClickCheckBox = {this.onClickCheckBox} clearCompleted={this.clearCompleted}
              deleteSingle ={this.deleteSingle}/>

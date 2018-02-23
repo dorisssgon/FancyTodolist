@@ -26,7 +26,6 @@ class TodoInput extends Component {
         })
 
     }
-   
     render(){
         return( 
         <div className = "input-greentea">
