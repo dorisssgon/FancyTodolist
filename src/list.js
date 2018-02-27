@@ -136,7 +136,7 @@ class ListItem extends Component {
                             onDoubleClick={()=>{
                             this.setState(
                                 {...this.state,flag:item.id})
-                            }}>>
+                            }}>
                             <label htmlFor={changeCheckbox} id="input-btn-img2">
                             <input type="checkbox"
                             id={changeCheckbox} 
@@ -179,7 +179,7 @@ class ListItem extends Component {
                      onDoubleClick={()=>{
                         this.setState(
                             {...this.state,flag:item.id})
-                     }}>>
+                     }}>
                          <label htmlFor={changeCheckbox} id="input-btn-img3">
                          <input type="checkbox"
                          id={changeCheckbox} 
