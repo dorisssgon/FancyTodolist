@@ -7,7 +7,7 @@ class TodoFrame extends Component {
     constructor(props){
         super(props);
         this.state = {
-            group:[]
+            group:[],
         }
         this.id = 0;
         this.addItem = this.addItem.bind(this);
@@ -15,6 +15,7 @@ class TodoFrame extends Component {
         this.didAll = this.didAll.bind(this);
         this.clearCompleted = this.clearCompleted.bind(this);
         this.deleteSingle =this.deleteSingle.bind(this);
+        this.updateState = this.updateState.bind(this);
     }
     addItem(str){
         var itemArray1=this.state.group.slice();
@@ -39,7 +40,6 @@ class TodoFrame extends Component {
             this.setState({
                 group:itemArray2
                 })
-            console.log(clicked);
         }
 
     didAll(){
@@ -75,17 +75,27 @@ class TodoFrame extends Component {
             this.setState({
                 group:ArrayList3
             })
-        
     }
-    
-
+    updateState(item,liststate){
+        console.log("here is")
+        var ArrayList4 = this.state.group.slice();
+            ArrayList4.map((single,index)=>{
+                if(item.id === single.id) {
+                    single.content = liststate
+                }
+            })
+        this.setState({
+            ...this.state,
+            group:ArrayList4
+        },function(){console.log(this.state.group)})
+    }
     render() {
       return (
         <div>         
 
             <TodoInput addItem={this.addItem} didAll={this.didAll}/>
             <ListItem items={this.state.group} onClickCheckBox = {this.onClickCheckBox} clearCompleted={this.clearCompleted}
-             deleteSingle ={this.deleteSingle}/>
+             deleteSingle ={this.deleteSingle}  updateState={this.updateState}/>
         </div>
       );
     }
