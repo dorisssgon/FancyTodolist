@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
 import './App.css';
-import TodoFrame from './todoframe';
+
 import after from '../src/assets/after.svg';
 import before from '../src/assets/before.svg';
 
@@ -9,11 +9,18 @@ class ListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: "all"
+            category: "all",
+            flag:"",
+            newInput:"",
+            entireContent:""
             }
         this.display = this.display.bind(this);
         this.changeCategory = this.changeCategory.bind(this);
-   
+        this.conditionalRender = this.conditionalRender.bind(this);
+        this.updatedInput = this.updatedInput.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
+        this.inputValue = this.inputValue.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
     changeCategory(event){
           this.setState({
@@ -21,7 +28,48 @@ class ListItem extends Component {
              category:event.target.value
           })
     }
-    
+    onInputChange(event){
+        this.setState({
+            ...this.state,
+            newInput:event.target.value
+        })
+    }
+    updatedInput(item,e){
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            entireContent: this.state.newInput,
+            flag:"",
+            newInput:""
+        },function() {this.props.updateState(item,this.state.entireContent)})
+    }
+
+    inputValue(item){
+        if(!this.state.newInput){
+            return(item.content)
+        }
+        return(this.state.newInput)
+    }
+    onBlur(e){
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            flag:"",
+            newInput:""
+        })
+    }
+
+    conditionalRender(item){
+        if(this.state.flag === item.id){
+        return(<form className="conditionList" 
+            onSubmit={(e)=>this.updatedInput(item,e)}>
+            <input id="updateInput" onChange = {this.onInputChange} value = {this.inputValue(item)} onBlur={this.onBlur}/>
+        </form>)}
+        else{
+            return(<span className="conditionalSpan">{item.content}</span>)
+        }
+    }
+
     display(){
         if (this.state.category === "all"){
         return(     
@@ -41,8 +89,12 @@ class ListItem extends Component {
                     }
                     var changeCheckbox = `changeCheckbox1${item.id}`;  
                        return(
-                        <li className="item-quaqua" key={index}>
-                            <label htmlFor={changeCheckbox} id="input-btn-img1">
+                        <li className="item-quaqua" key={index} 
+                            onDoubleClick={()=>{
+                                this.setState(
+                                    {...this.state,flag:item.id})
+                             }}>
+                            <label className="labelPia"htmlFor={changeCheckbox}>
                             <input type="checkbox" className="list-btnn"
                             id={changeCheckbox} 
                             onClick={()=>this.props.onClickCheckBox(item)}
@@ -50,9 +102,9 @@ class ListItem extends Component {
                             style={{
                                 display:'none'
                             }}/>
-                            <div className = "imageicon"style={style}></div>
+                            <div className = "imageicon" style={style}></div>
                             </label>
-                           {item.content}
+                            {this.conditionalRender(item)}
                             <button className="list-btn" onClick={()=>this.props.deleteSingle(item,index)}></button>
                         </li>);
                     }
@@ -80,7 +132,11 @@ class ListItem extends Component {
                     }
                     var changeCheckbox = `changeCheckbox2${item.id}`;  
                        return(
-                        <li className="item-quaqua" key={index}>
+                        <li className="item-quaqua" key={index}
+                            onDoubleClick={()=>{
+                            this.setState(
+                                {...this.state,flag:item.id})
+                            }}>>
                             <label htmlFor={changeCheckbox} id="input-btn-img2">
                             <input type="checkbox"
                             id={changeCheckbox} 
@@ -91,7 +147,7 @@ class ListItem extends Component {
                             }}/>
                             <div className = "imageicon"style={style}></div>
                             </label>
-                            {item.content}
+                            {this.conditionalRender(item)}
                             <button className="list-btn" onClick={()=>this.props.deleteSingle(item,index)}></button>
                         </li>);
                     }
@@ -119,7 +175,11 @@ class ListItem extends Component {
                     }
                     var changeCheckbox = `changeCheckbox3${item.id}`;  
                     return(
-                     <li className="item-quaqua" key={index}>
+                     <li className="item-quaqua" key={index}
+                     onDoubleClick={()=>{
+                        this.setState(
+                            {...this.state,flag:item.id})
+                     }}>>
                          <label htmlFor={changeCheckbox} id="input-btn-img3">
                          <input type="checkbox"
                          id={changeCheckbox} 
@@ -130,7 +190,8 @@ class ListItem extends Component {
                          }}/>
                          <div className = "imageicon"style={style}></div>
                          </label>
-                         {item.content}
+                         {this.conditionalRender(item)}
+                        
                          <button className="list-btn" onClick={()=>this.props.deleteSingle(item,index)}></button>
                      </li>);
                     }
@@ -141,12 +202,11 @@ class ListItem extends Component {
     render(){
         return(
             <div className="list-all">
-                 <div className="item-list">
+                <div className="item-list">
                     <ul className="unorder-list">
                         {this.display()}
                     </ul>
-                 </div>    
-    
+                </div>    
                 <span id= "left-span">{this.props.items.length} items left</span>
                 <div className="btn-list">
                 <button className = "last-btn" onClick={this.changeCategory} value="all">All</button>
