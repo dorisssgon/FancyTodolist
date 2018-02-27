@@ -61,11 +61,13 @@
 .item-quaqua{
   font-family: cursive;
   font-size:27px;
-  height:67px;
+  height:auto;
   width:470px;
-  margin: 0px;
+  margin-top:10px;
+  margin-left:5px;
   transition-duration: 3s;
   transition-property: background-image;
+  
 }
 /* .item-quaqua .list-btn {
   display: none;
@@ -161,4 +163,30 @@
   margin-left:5px;
   margin-top:20px;
   margin-right:40px;
+}
+.conditionList{
+  vertical-align: middle;
+  display: inline-block;
+}
+#updateInput{
+  display: inline-block;
+  font-family: cursive;
+  font-size:25px;
+  width:370px;
+  /* margin: 0px; */
+}
+.conditionalSpan{
+  display:inline-block;
+  width:370px;
+  /* white-space:pre-wrap; */
+  word-wrap:break-word; 
+  /* overflow:hidden; */
+  
+}
+li +li{
+  border-top:1px dashed rgba(117, 115, 115, 0.342);
+}
+
+.labelPia{
+  vertical-align: center;
 }
